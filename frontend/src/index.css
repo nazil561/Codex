@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body {
+    @apply bg-bg text-fg antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(145,70,255,0.15), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(145,70,255,0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent/60 ring-offset-2 ring-offset-bg;
+  }
+  ::selection {
+    background: rgba(145,70,255,0.35);
+    color: #fff;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); background-clip: content-box; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-hover hover:shadow-accent-glow active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-bg-elevated text-fg border border-white/10 hover:bg-white/[0.06] hover:border-white/20 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn text-fg-muted hover:text-fg hover:bg-white/[0.04];
+  }
+  .input {
+    @apply w-full rounded-lg bg-bg-elevated border border-white/10 px-3 py-2.5 text-sm text-fg placeholder:text-fg-dim focus:border-accent/60 focus:bg-bg-card transition-colors;
+  }
+  .label {
+    @apply block text-sm font-medium text-fg-muted mb-1.5;
+  }
+  .card {
+    @apply rounded-2xl border border-white/[0.06] bg-bg-card shadow-card;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:border-white/10 hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.14em] text-fg-muted;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
