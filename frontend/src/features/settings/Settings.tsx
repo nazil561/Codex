@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '@/api';
 import { useMe } from '@/hooks';
@@ -7,6 +7,7 @@ import { fmtRelative } from '@/lib/format';
 
 export default function Settings() {
   const me = useMe();
+  const lastChecked = useMemo(() => new Date().toISOString(), []);
   const nav = useNavigate();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -94,7 +95,7 @@ export default function Settings() {
           {me.state.data.login && (
             <div className="text-xs text-fg-dim">
               Demo mode notice: sample data only. Status refreshes every page load.
-              {me.state.data.status === 'connected' && ` · last checked ${fmtRelative(new Date().toISOString())}`}
+              {me.state.data.status === 'connected' && ` · last checked ${fmtRelative(lastChecked)}`}
             </div>
           )}
         </>

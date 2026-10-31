@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import {
   Home, LayoutDashboard, Sparkles, BarChart3,
   Settings as Cog, Menu, X,
@@ -55,9 +55,6 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 
 export default function Layout() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => { setDrawerOpen(false); }, [location.pathname]);
 
   useEffect(() => {
     if (!drawerOpen) return;

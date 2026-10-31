@@ -1,6 +1,6 @@
 import type {
   Me, StreamStatus, EngagementSession, LiveMetrics,
-  Suggestion, Poll, ApiErrorBody,
+  Suggestion, Poll,
 } from '@/types/api';
 
 const BASE = import.meta.env.VITE_API_BASE_URL ?? '';
@@ -27,12 +27,16 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   });
   if (res.status === 204) return undefined as T;
   if (!res.ok) {
-    let body: ApiErrorBody | null = null;
-    try { body = (await res.json()) as ApiErrorBody; } catch { /* ignore */ }
+    let body: { error?: { code?: string; message?: string }; detail?: { error?: { code?: string; message?: string } } } | null = null;
+    try { body = await res.json(); } catch { /* ignore */ }
+    // Backend returns two shapes depending on handler:
+    //   APIError:       {"error": {"code","message"}}
+    //   HTTPException:  {"detail": {"error": {"code","message"}}}
+    const err = body?.error ?? body?.detail?.error;
     throw new ApiError(
       res.status,
-      body?.error?.code ?? 'http_error',
-      body?.error?.message ?? res.statusText,
+      err?.code ?? 'http_error',
+      err?.message ?? res.statusText,
     );
   }
   return res.json() as Promise<T>;
