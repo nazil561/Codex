@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     CHATTER_HASH_PEPPER: str = ""
     OPENAI_API_KEY: str | None = None
     OPENAI_MODEL: str | None = None
+    OPENAI_BASE_URL: str | None = None
     OPENAI_TIMEOUT_SECONDS: int = 8
 
     def validate_settings(self):

@@ -8,6 +8,7 @@ ARG PIP_INDEX_URL=https://pypi.org/simple
 ENV PIP_INDEX_URL=${PIP_INDEX_URL}
 
 COPY pyproject.toml /app/
+COPY src /app/src
 RUN pip install --no-cache-dir -i ${PIP_INDEX_URL} ".[dev]"
 
 COPY . /app
