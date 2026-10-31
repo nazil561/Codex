@@ -2,7 +2,7 @@ version: 1
 type: web
 build:
   framework: dockerfile
-  dockerfile: backend/Dockerfile
   root_dir: backend
+  dockerfile: Dockerfile
 run:
   port: 8000
