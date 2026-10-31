@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://warm-drifter-7626.deplexo.com/api/$1" },
+    { "source": "/api/(.*)", "destination": "https://YOUR-VERIFIED-URL.deplexo.com/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
